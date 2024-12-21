@@ -1,0 +1,19 @@
+{
+    "captain": {
+        "fullname": {
+            "firstname": "test_captain_firstname",
+            "lastname": "test_captain_lastname"
+        },
+        "email": "test_email@gmail.com",
+        "password": "$2b$10$XNcQAM4UU/MNsbeFvhwciOikCuED7ra.cKTZIcYbmEMSuCRspy1E.",
+        "status": "inactive",
+        "vehicle": {
+            "color": "white",
+            "plate": "MH 15 gf 8283",
+            "capacity": 3,
+            "vehicleType": "Car"
+        },
+        "_id": "6766a1a2cee061b041a06234"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY2YTFhMmNlZTA2MWIwNDFhMDYyMzQiLCJpYXQiOjE3MzQ3NzkyOTgsImV4cCI6MTczNDg2NTY5OH0.ssMwYAyWwy_JvwYKDQNxW2OIQnbVKVsy6fsthwQgWuo"
+}
