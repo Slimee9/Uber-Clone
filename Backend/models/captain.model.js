@@ -55,10 +55,10 @@ const captainSchema = new mongoose.Schema({
             required: true,
             enum: ['car', 'auto', 'bike'],
             validate: {
-                validator: function (value) {
-                    return value.toLowerCase() === this.vehicleType.toLowerCase();
+                validator: function () {
+                    return ['car', 'auto', 'bike'].includes(value.toLowerCase());
                 },
-                message: 'Invalid vehicle type'
+                message: "`{VALUE}` Invalid vehicle type"
             }
         }
     },
@@ -83,11 +83,11 @@ captainSchema.methods.comparePassword = async function (password)  {
     return await bcrypt.compare(password, this.password);
 }
 
+
 captainSchema.statics.hashPassword = async function (password) {
     return await bcrypt.hash(password, 10);
 }
 
 const captainModel = mongoose.model('captain',captainSchema);
-
 
 module.exports = captainModel;
