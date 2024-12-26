@@ -16,7 +16,7 @@ router.post('/register',[
         if (!validVehicleTypes.includes(value.toLowerCase())) {
             throw new Error("Invalid vehicle type");
         }
-        return true;
+        return true; 
     })
 ],
     captainController.registerCaptain 

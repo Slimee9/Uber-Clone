@@ -54,11 +54,11 @@ const captainSchema = new mongoose.Schema({
             type: String,
             required: true,
             enum: ['car', 'auto', 'bike'],
-            validate: {
-                validator: function () {
-                    return ['car', 'auto', 'bike'].includes(value.toLowerCase());
+            validate:  {
+                validator: function (vehicleType) {
+                    return ['car', 'auto', 'bike'].includes(vehicleType.toLowerCase());
                 },
-                message: "`{VALUE}` Invalid vehicle type"
+                message: (props) => `${props.value} is an invalid vehicle type. Valid types are car, auto, or bike.`,
             }
         }
     },

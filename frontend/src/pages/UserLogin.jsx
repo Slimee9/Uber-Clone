@@ -1,26 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import {UserDataContext} from '../context/UserContext'
+import axios from 'axios'
+
 const UserLogin = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [userData, setUserData] = useState({})
 
-  const handleSubmit = (e) => {
+  const { user, setUser } = useContext (UserDataContext)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('submit')
-    setUserData({ 
+
+    const userData = {
       email : email,
       password  : password
-    })
+    }
+
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
+    if (response.status === 200) {
+      const data = response.data
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      navigate('/home')
+    }
+
+    // setUserData({ 
+    //   email : email,
+    //   password  : password
+    // })
     setEmail(''),
     setPassword('')
   }
 
-  useEffect(() => {
-    console.log('User Data', userData)
-  }, [userData]);
+  // useEffect(() => {
+  //   console.log('User Data', userData)
+  // }, [userData]);
 
   return (
     <div className='p-7 flex flex-col justify-between h-screen items-center'>
