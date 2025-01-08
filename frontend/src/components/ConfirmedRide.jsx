@@ -16,20 +16,20 @@ const ConfirmedRide = (params) => {
                <i className='ri-map-pin-fill text-lg'></i> 
                <div>
                  <h3 className='text-lg font-medium'> 562/11-a</h3>
-                 <p className='text-sm -mt-1 text-gray-600'>Kankariya Talab , Nashik</p>
+                 <p className='text-sm -mt-1 text-gray-600'>{params.pickup}</p>
                </div>
         </div>
         <div className='flex items-center gap-5 p-3 border-b-2'>
         <i className='ri-map-pin-2-fill text-lg'></i> 
                <div>
                  <h3 className='text-lg font-medium'> 562/11-a</h3>
-                 <p className='text-sm -mt-1 text-gray-600'>Kankariya Talab , Nashik</p>
+                 <p className='text-sm -mt-1 text-gray-600'>{params.destination}</p>
                </div>
         </div>
         <div className='flex items-center gap-5 p-3' >
         <i className='ri-currency-line text-lg'></i> 
                <div>
-                 <h3 className='text-lg font-medium'>₹193.20</h3>
+                 <h3 className='text-lg font-medium'>₹{params.fare[params.vehicleType]}</h3>
                  <p className='text-sm -mt-1 text-gray-600'>Cash-cash</p>
                </div>
         </div>
@@ -38,6 +38,7 @@ const ConfirmedRide = (params) => {
           params.setVehicleFound(true)
           params.setConfirmedRidePanel(false)
           params.setVehiclePanel(false)
+          params.createRide()
           }} className='bg-green-600 mt-3 text-white p-2 rounded-lg font-medium text-2xl w-[75%]'>Confirm</button>
       </div>
     </div>

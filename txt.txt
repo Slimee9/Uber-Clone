@@ -17,3 +17,30 @@
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY2YTFhMmNlZTA2MWIwNDFhMDYyMzQiLCJpYXQiOjE3MzQ3NzkyOTgsImV4cCI6MTczNDg2NTY5OH0.ssMwYAyWwy_JvwYKDQNxW2OIQnbVKVsy6fsthwQgWuo"
 }
+
+Uber Clone app
+ React, Node.js, Express, and MongoDB as you create a fully functional ride-booking application. From designing the user interface to implementing backend APIs and real-time features,
+ Perfect for developers looking to level up their skills and create professional-grade projects
+
+ Uber Clone App | Dec 2024
+
+Developed a ride-booking application featuring real-time ride tracking and driver-rider communication.
+Built a responsive and user-friendly interface using React for cross-platform compatibility.
+Designed secure and scalable backend APIs with Node.js and Express.
+Integrated MongoDB for efficient storage and retrieval of user and ride data.
+Implemented features such as user authentication, booking management, and fare calculation.
+Added real-time notifications to enhance user engagement and experience.
+Technologies: React, Node.js, Express, MongoDB
+
+"Developed a fully functional Uber Clone application using React, Node.js, Express, and MongoDB. Designed a user-friendly and responsive user interface with React, ensuring cross-platform compatibility. Built secure and scalable backend APIs using Node.js and Express, integrating real-time ride tracking and notifications. Implemented features like user authentication, booking management, fare calculation, and driver-rider communication. Utilized MongoDB for efficient data storage and retrieval, ensuring robust database design. This project demonstrates expertise in building professional-grade, real-world applications and advanced problem-solving skills in full-stack development."This version highlights additional technical skills and features, making it more comprehensive.
+
+Frontend: React, React Router, Tailwind CSS/Bootstrap (for styling), Redux (if used for state management).
+Backend: Node.js, Express.js.
+Database: MongoDB (NoSQL database for storing user and ride data).
+Authentication: JWT (JSON Web Token) for secure authentication.
+Real-time Communication: Socket.IO for real-time updates (e.g., ride tracking, notifications).
+API Management: RESTful APIs for communication between frontend and backend.
+Mapping & Geolocation: Google Maps API for geocoding and distance matrix services.
+Payment Integration: Stripe or Razorpay for processing ride payments (if applicable).
+Deployment & Hosting: AWS, Heroku, or Vercel for backend and frontend hosting.
+Version Control:: Git and GitHub for code management.

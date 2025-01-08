@@ -7,6 +7,7 @@ const WaitingForDriver = (params) => {
         params.waitingForDriver(false)
       }} className='p-1 text-center w-[93%] absolute top-0 '>
         <i className='ri-arrow-down-wide-line text-3xl text-gray-200'></i></h5>
+     
       <div className='flex items-center justify-between'>
       <img className='h-14' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ7Kt54z31PkbdlqmqnyWnaCjvcLYRG-T_8Q&s" alt="" />
         <div className='text-right'>
