@@ -7,7 +7,6 @@ const socket = io(`${import.meta.env.VITE_BASE_URL}`);
 
 const SocketProvider = ({ children }) => {
     useEffect(() => {
-      
        socket.on ('connect', () => {
             console.log('Connected to server')
         })
@@ -16,17 +15,9 @@ const SocketProvider = ({ children }) => {
         console.log('Disconnected to server')
       })
     }, []);
-
-    const sendMessage = (eventName, message) => {
-        socket.emit(eventName, message)
-    }
-
-    const receiveMessage = (eventName, callback) => {
-        socket.on(eventName, callback)
-    }
     
   return (
-    <SocketContext.Provider value={{sendMessage, receiveMessage }}>
+    <SocketContext.Provider value={{ socket }}>
         {children}
     </SocketContext.Provider> 
   )

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import CaptainDetails from "../components/CaptainDetails";
 import RidePopUp from "../components/RidePopUp";
@@ -6,6 +6,9 @@ import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { CaptainDataContext } from "../context/CaptainContext";
+import { SocketContext } from "../context/SocketContext";
+
+
 const CaptainHome = () => {
 
   const [ridePopPanel, setRidePopPanel] = useState(true)
@@ -13,6 +16,52 @@ const CaptainHome = () => {
 
   const [confirmedRidePopUp, setconfirmedRidePopUp] = useState(false)
   const confirmedRidePopUpRef = useRef(null)
+
+  const { socket } = useContext(SocketContext)
+  const { captain } = useContext(CaptainDataContext)
+
+
+  useEffect(() => {
+
+    console.log("Captain",captain)
+    // console.log("Captain",captain.data._id)
+
+    socket.emit('join', {
+      userId: (captain.data._id),
+      userType: 'captain'
+    })
+
+    const updateLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+
+          console.log({userId: captain.data._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude
+            }})
+
+          socket.emit('update-location-captain', {
+            userId: captain.data._id,
+            location: {
+              ltd: position.coords.latitude,
+              lng: position.coords.longitude
+            }
+          })
+        })
+      }
+    }
+
+    const locationInterval = setInterval(updateLocation, 10000)
+    updateLocation()
+    // return () => clearInterval(locationInterval)
+  })
+
+socket.on('new-ride',(data) => {
+  console.log(data)
+  // setRidePopPanel(true)
+})
+  
   useGSAP(()=>{
     if(ridePopPanel){
       gsap.to(ridePopPanelRef.current,{

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import 'remixicon/fonts/remixicon.css'
@@ -8,6 +8,9 @@ import VehiclePanel from '../components/VehiclePanel'
 import ConfirmedRide from '../components/ConfirmedRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
+import { SocketContext } from '../context/SocketContext'
+import {UserDataContext} from '../context/UserContext'
+
 
 const Home = () => {
 
@@ -33,6 +36,17 @@ const Home = () => {
   const [fare, setFare] = useState({})
 
   const [vehicleType, setVehicleType] = useState(null)
+
+  const { socket } = useContext(SocketContext)
+  const {user} = useContext(UserDataContext)
+
+  useEffect(() => {
+    console.log(user._id)
+    // console.log(user)
+    socket.emit("join", {userType : "user", userId: user._id})
+  
+  },[user])
+  
 
   const handlePickupChange = async (e) => {
     setPickup(e.target.value)
