@@ -7,15 +7,18 @@ import gsap from 'gsap'
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { CaptainDataContext } from "../context/CaptainContext";
 import { SocketContext } from "../context/SocketContext";
+import axios from 'axios'
 
 
 const CaptainHome = () => {
 
-  const [ridePopPanel, setRidePopPanel] = useState(true)
+  const [ridePopPanel, setRidePopPanel] = useState(false)
   const ridePopPanelRef = useRef(null)
 
   const [confirmedRidePopUp, setconfirmedRidePopUp] = useState(false)
   const confirmedRidePopUpRef = useRef(null)
+
+  const [ride, setRide] = useState(null)
 
   const { socket } = useContext(SocketContext)
   const { captain } = useContext(CaptainDataContext)
@@ -59,8 +62,30 @@ const CaptainHome = () => {
 
 socket.on('new-ride',(data) => {
   console.log(data)
-  // setRidePopPanel(true)
+  setRide(data)
+  setRidePopPanel(true)
 })
+
+const confirmRide = async () => {
+
+  const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`,{
+    rideId: ride._id,
+    captainId: captain._id,
+  },{
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+  
+  setRidePopPanel(false)
+  setconfirmedRidePopUp(true)
+
+  socket.emit('confirm-ride', {
+    userId: captain._id,
+    rideId:ride._id
+  })
+
+}
   
   useGSAP(()=>{
     if(ridePopPanel){
@@ -110,11 +135,18 @@ socket.on('new-ride',(data) => {
         </div>
 
         <div ref={ridePopPanelRef} className='fixed w-full z-10 bottom-0 translate-y-fill  px-3 py-10 pt-12 bg-white'>
-          <RidePopUp setRidePopPanel={setRidePopPanel} setconfirmedRidePopUp={setconfirmedRidePopUp}/>
+          <RidePopUp 
+            setRidePopPanel={setRidePopPanel} 
+            setconfirmedRidePopUp={setconfirmedRidePopUp}
+            ride={ride}
+            confirmRide={confirmRide}
+            />
         </div>
 
         <div ref={confirmedRidePopUpRef} className='fixed w-full h-screen z-10 bottom-0  translate-y-full  px-3 py-10 pt-12 bg-white'>
-          <ConfirmRidePopUp setconfirmedRidePopUp={setconfirmedRidePopUp} setRidePopPanel={setRidePopPanel}/>
+          <ConfirmRidePopUp 
+            setconfirmedRidePopUp={setconfirmedRidePopUp} 
+            setRidePopPanel={setRidePopPanel}/>
         </div>
       </div>
   );

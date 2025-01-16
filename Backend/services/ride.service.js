@@ -71,5 +71,32 @@ module.exports.createRide = async ({
         fare: fare[vehicleType]
     });
 
-    return ride;
+    const savedRide = await ride.save();
+    console.log("Saved Ride:", savedRide);
+
+    return savedRide;
  }
+
+ module.exports.confirmRide = async ({
+    rideId, captain }) => {
+        if(!rideId){
+            throw new Error('Ride id is required');
+        }
+
+        await rideModel.findByIdAndUpdate({
+            _id: rideId
+        },{
+            status:'accepted',
+            captain: captain._id
+        })
+
+        const ride = await rideModel.findOne({ 
+            _id: rideId
+        }).populate('user').populate('captain').select('+otp');
+
+        if (!ride) {
+            throw new Error('Ride not found');
+        }
+
+        return ride;
+    }

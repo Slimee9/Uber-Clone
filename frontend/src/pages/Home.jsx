@@ -40,12 +40,20 @@ const Home = () => {
   const { socket } = useContext(SocketContext)
   const {user} = useContext(UserDataContext)
 
+  const [ride, setRide] = useState(null)
+
   useEffect(() => {
     console.log(user._id)
     // console.log(user)
     socket.emit("join", {userType : "user", userId: user._id})
-  
   },[user])
+
+  socket.on('ride-confirmed', ride => {
+    setVehicleFound(false)
+    setWaitingForDriver(true)
+    setRide(ride)
+    console.log(ride)
+  })
   
 
   const handlePickupChange = async (e) => {
@@ -135,7 +143,7 @@ const Home = () => {
       })
     }else{
       gsap.to(vehicleFoundRef.current,{
-      transform:'translateY(100%)'
+      transform:'translateY(110%)'
     })
   }
   },[vehicleFound])
@@ -264,7 +272,7 @@ const Home = () => {
               />
       </div>
 
-      <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full px-3 py-6 pt-12 bg-white'>
+      <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0  translate-y-full px-3 py-6 pt-12 bg-white'>
               <LookingForDriver 
                   setVehicleFound={setVehicleFound}
                   createRide={createRide}
@@ -277,7 +285,10 @@ const Home = () => {
 
       <div ref={waitingForDriverRef}  className='fixed w-full z-10 bottom-0  px-3 py-6 pt-12 bg-white'>
               <WaitingForDriver  
-                waitingForDriver={waitingForDriver} />
+                ride={ride}
+                waitingForDriver={waitingForDriver}
+                setVehiclePanel={setVehiclePanel}
+                 />
       </div>
     </div>
   )
