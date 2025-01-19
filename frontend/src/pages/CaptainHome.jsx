@@ -77,7 +77,7 @@ const confirmRide = async () => {
     }
   })
   
-  setRidePopPanel(false)
+  setRidePopPanel(true)
   setconfirmedRidePopUp(true)
 
   socket.emit('confirm-ride', {
@@ -145,6 +145,7 @@ const confirmRide = async () => {
 
         <div ref={confirmedRidePopUpRef} className='fixed w-full h-screen z-10 bottom-0  translate-y-full  px-3 py-10 pt-12 bg-white'>
           <ConfirmRidePopUp 
+            ride={ride}
             setconfirmedRidePopUp={setconfirmedRidePopUp} 
             setRidePopPanel={setRidePopPanel}/>
         </div>

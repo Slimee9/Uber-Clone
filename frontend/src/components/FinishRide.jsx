@@ -1,6 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 const FinishRide = (params) => {
+
+  
+
+  console.log("FinishRide ", params.ride)
+
   return (
     <div className="">
       <h5
@@ -22,7 +27,7 @@ const FinishRide = (params) => {
             src="https://i1.sndcdn.com/avatars-000339084123-nag0p1-t1080x1080.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium ">Harsh Patel</h2>
+          <h2 className="text-lg font-medium">{params.ride?.user.fullname.firstname}</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 kM</h5>
       </div>
@@ -33,7 +38,7 @@ const FinishRide = (params) => {
             <div>
               <h3 className="text-lg font-medium"> 562/11-a</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab , Nashik
+              {params.ride?.pickup}
               </p>
             </div>
           </div>
@@ -42,14 +47,14 @@ const FinishRide = (params) => {
             <div>
               <h3 className="text-lg font-medium"> 562/11-a</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab , Nashik
+              {params.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-line text-lg"></i>
             <div>
-              <h3 className="text-lg font-medium">₹193.20</h3>
+              <h3 className="text-lg font-medium">₹{params.ride?.fare}</h3>
               <p className="text-sm -mt-1 text-gray-600">Cash-cash</p>
             </div>
           </div>

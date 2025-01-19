@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import  axios  from 'axios';
+
 
 const ConfirmRidePopUp = (params) => {
+
   const [otp, setOtp] = useState("")
-const  submitHandler = (e)=>{
+  const navigate = useNavigate()
+
+  const submitHandler = async (e)=>{
     e.preventDefault()
+
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`,{
+      params: {
+        rideId : params.ride._id,
+        otp: otp
+    },
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    if (response.status == 200) {
+      params.setconfirmedRidePopUp(false)
+      params.setRidePopPanel(false)
+  navigate('/captain-riding', { state: {ride: params.ride}})
+    }
+
   }
   return (
     <div className="">
@@ -27,7 +48,7 @@ const  submitHandler = (e)=>{
             src="https://i1.sndcdn.com/avatars-000339084123-nag0p1-t1080x1080.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium ">Harsh Patel</h2>
+          <h2 className="text-lg font-medium capitalize ">{params.ride?.user.fullname.firstname}</h2>
         </div>
         <h5 className="text-lg font-semibold">2.2 kM</h5>
       </div>
@@ -38,7 +59,7 @@ const  submitHandler = (e)=>{
             <div>
               <h3 className="text-lg font-medium"> 562/11-a</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab , Nashik
+                {params.ride?.pickup}
               </p>
             </div>
           </div>
@@ -47,25 +68,21 @@ const  submitHandler = (e)=>{
             <div>
               <h3 className="text-lg font-medium"> 562/11-a</h3>
               <p className="text-sm -mt-1 text-gray-600">
-                Kankariya Talab , Nashik
+              {params.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
             <i className="ri-currency-line text-lg"></i>
             <div>
-              <h3 className="text-lg font-medium">₹193.20</h3>
+                <h3 className="text-lg font-medium">₹{params.ride?.fare}</h3>
               <p className="text-sm -mt-1 text-gray-600">Cash-cash</p>
             </div>
           </div>
         </div>
         <div className="mt-6 w-ful flex justify-center items-center ">
-          <form
-            action=""
-            onSubmit={(e) => {
-              submitHandler(e);
-            }}
-          >
+          <form onSubmit={submitHandler}>
+
             <input
               className="bg-[#eee] px-6 py-4 flex font-mono text-lg rounded-lg w-full mt-3 text-center placeholder:text-center placeholder:text-gray-500"
               type="text"
@@ -74,14 +91,15 @@ const  submitHandler = (e)=>{
               onChange={(e)=>{setOtp(e.target.value)}}
             />
 
-            <Link to={"/captain-riding"}
-             className="bg-green-600 items-center flex justify-center mt-3 text-white p-3 rounded-lg font-semibold text-lg "> 
-            Confirm </Link>
+            <button 
+             className="bg-green-600 w-full items-center flex justify-center mt-3 text-white p-3 rounded-lg font-semibold text-lg "> 
+            Confirm </button>
+
             <button onClick={() => {
                 params.setconfirmedRidePopUp(false);
                 params.setRidePopPanel(false);
               }}
-              className="bg-red-500 items-center justify-center flex mt-2  text-white p-3 rounded-lg font-semibold text-lg w-full "
+              className="bg-red-500 mb-3 items-center justify-center flex mt-2  text-white p-3 rounded-lg font-semibold text-lg w-full "
             >
               Cancel
             </button>

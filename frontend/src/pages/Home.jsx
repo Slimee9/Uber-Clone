@@ -10,6 +10,7 @@ import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
 import { SocketContext } from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
@@ -42,6 +43,8 @@ const Home = () => {
 
   const [ride, setRide] = useState(null)
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     console.log(user._id)
     // console.log(user)
@@ -53,6 +56,12 @@ const Home = () => {
     setWaitingForDriver(true)
     setRide(ride)
     console.log(ride)
+  })
+
+  socket.on('ride-started', ride => {
+    setWaitingForDriver(false)
+    console.log("riddde",ride)
+    navigate('/riding', { state: {ride} })
   })
   
 
@@ -185,7 +194,6 @@ const Home = () => {
       Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
-
     console.log(response.data)
   }
    
