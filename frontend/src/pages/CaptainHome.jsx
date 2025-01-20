@@ -23,7 +23,6 @@ const CaptainHome = () => {
   const { socket } = useContext(SocketContext)
   const { captain } = useContext(CaptainDataContext)
 
-
   useEffect(() => {
 
     console.log("Captain",captain)
@@ -54,11 +53,50 @@ const CaptainHome = () => {
         })
       }
     }
-
-    const locationInterval = setInterval(updateLocation, 10000)
+      const locationInterval = setInterval(updateLocation, 10000)
     updateLocation()
     // return () => clearInterval(locationInterval)
   })
+
+
+  // useEffect(() => {
+  //   if (!captain || !socket) return;
+  
+  //   console.log("Captain", captain);
+  
+  //   socket.emit('join', {
+  //     userId: captain.data._id,
+  //     userType: 'captain',
+  //   });
+  
+  //   const watchId = navigator.geolocation.watchPosition(
+  //     (position) => {
+  //       console.log({
+  //         userId: captain.data._id,
+  //         location: {
+  //           ltd: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         },
+  //       });
+  
+  //       socket.emit('update-location-captain', {
+  //         userId: captain.data._id,
+  //         location: {
+  //           ltd: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         },
+  //       });
+  //     },
+  //     (error) => {
+  //       console.error("Geolocation error:", error.message);
+  //     }
+  //   );
+  
+  //   return () => {
+  //     if (watchId) navigator.geolocation.clearWatch(watchId);
+  //   };
+  // }, [captain, socket]);
+  
 
 socket.on('new-ride',(data) => {
   console.log(data)

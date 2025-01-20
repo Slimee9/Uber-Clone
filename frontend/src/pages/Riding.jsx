@@ -1,10 +1,18 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { SocketContext } from '../context/SocketContext'
 
 const Riding = (params) => {
 
   const location = useLocation()
   const {ride} = location.state || {}
+
+  const { socket } =  useContext(SocketContext)
+  const navigate = useNavigate()
+
+  socket.on("ride-ended",()=> {
+    navigate('/home')
+  })
 
   console.log(ride)
   

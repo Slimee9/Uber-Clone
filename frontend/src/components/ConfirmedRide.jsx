@@ -4,7 +4,7 @@ const ConfirmedRide = (params) => {
   return (
     <div>
         <h5 onClick={()=>{
-        params.setConfirmedRidePanel(false)
+        params.setConfirmedRidePanel(true)
       }} className='p-1 text-center w-[93%] absolute top-0 '>
         <i className='ri-arrow-down-wide-line text-3xl text-gray-200'></i></h5>
         <h3 className='text-2xl font-semibold mb-5'>Confirm your Ride</h3>

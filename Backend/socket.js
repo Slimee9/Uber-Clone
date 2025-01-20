@@ -28,7 +28,7 @@ function initializeSocket(server) {
                 await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
             }
         });
-
+  
 
         socket.on('update-location-captain', async (data) => {
             const { userId, location } = data;
