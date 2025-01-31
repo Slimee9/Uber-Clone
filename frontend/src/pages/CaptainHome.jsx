@@ -8,6 +8,7 @@ import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { CaptainDataContext } from "../context/CaptainContext";
 import { SocketContext } from "../context/SocketContext";
 import axios from 'axios'
+import LiveTracking from "../components/LiveTracking";
 
 
 const CaptainHome = () => {
@@ -151,8 +152,8 @@ const confirmRide = async () => {
 
   return (
       <div className="h-screen">
-        <div className="fixed p-6 top-0 flex items-center justify-between w-screen">
-          <img className="w-16" src="Uber_logo.png" alt="" />
+        <div className="fixed  p-6 top-0 flex items-center justify-between w-screen">
+          <img className="w-16 absolute" src="Uber_logo.png" alt="" />
 
           <Link
             to={"/home"}
@@ -162,10 +163,11 @@ const confirmRide = async () => {
           </Link>
         </div>
         <div className="h-3/5">
+        <LiveTracking />
           <img
-            className="h-full w-full object-cover"
-            src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
-            alt="temp-img"
+            // className="h-full w-full object-cover"
+            // src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
+            // alt="temp-img"
           />
         </div>
         <div className="h-2/5 p-4">

@@ -11,6 +11,7 @@ import WaitingForDriver from '../components/WaitingForDriver'
 import { SocketContext } from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import LiveTracking from '../components/LiveTracking'
 
 
 const Home = () => {
@@ -204,7 +205,8 @@ const Home = () => {
       <img className='w-16 ml-8 absolute left-5 top-5' src="Uber_logo.png" alt="" />
       
       <div  className='h-screen w-screen'>
-        <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="temp-img" />
+        <LiveTracking />
+        {/* <img className='h-full w-full object-cover' src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif" alt="temp-img" /> */}
       </div>
 
       <div className=' flex flex-col justify-end  h-screen absolute top-0 w-full '>

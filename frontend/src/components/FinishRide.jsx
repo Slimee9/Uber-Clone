@@ -29,6 +29,7 @@ const FinishRide = (params) => {
 
   return (
     <div className="">
+      
       <h5
         onClick={() => {
           params.setfinishRidePanel(false);
